@@ -150,4 +150,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "refeitorioifmg@gmail.com"
-EMAIL_HOST_PASSWORD = "pkeudijazgnxxdsd"
+# The e-mails password must be configured
+# EMAIL_HOST_PASSWORD = ""
