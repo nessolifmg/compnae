@@ -1,0 +1,52 @@
+{% extends 'modelo_serv.html' %}
+{% block titulo %}
+    <title>Média dos Alimentos</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Média dos Alimentos</h1>
+{% endblock %}
+
+{% block campos %}
+    <div class = "row mb-2">
+        <div class="col-auto">
+            <label>Edital:</label>
+            <select class="form-select col-auto border-dark" name="select_editais">
+                {% for edital in editais %}
+                    <option  value='{{edital.id}}'>{{edital.numero}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto py-4">
+            <button class="btn btn-md btn-block btn-primary font-black" type="submit">FILTRAR</button>
+        </div>
+        
+    </div>    
+{% endblock %}
+
+{% block cabecalho_tabela %}
+    <thead>
+        <tr>
+            <th scope="col" colspan="5">Alimentos por Edital vigente</th>
+        </tr>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Quantidade (Kg)</th>
+            <th scope="col">Media (R$)</th>
+        </tr>
+    </thead>
+{% endblock %}
+
+{% block conteudo_tabela %}
+    <tbody>
+            {% for nome,vmedia in alimentos %}
+                <tr>
+                    <td>{{nome}}</td>
+                    <td>{{vmedia.1}}</td>
+                    <td>{{vmedia.0  }}</td>
+                </tr>  
+            {%endfor%}         
+    </tbody>   
+{% endblock %}
+
+

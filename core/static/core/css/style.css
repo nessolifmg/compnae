@@ -1,0 +1,30 @@
+h1, h2, h3, h5, p, label{
+    font-family: alegreya;
+}
+a, th, td{
+    font-family: 'Roboto', sans-serif;
+}
+
+.text-muted{
+    color: rgb(61, 60, 60)!important;
+}
+
+li>a:hover {
+    background-color: rgb(15, 105, 56);
+}
+
+#menubar {
+    background-color: rgb(94, 212, 100);
+}
+
+body{
+    background-color: rgb(241, 237, 237);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgb(156, 149, 149);
+ }
+     
+ .active {
+    background-color: rgb(236, 130, 9);
+  }

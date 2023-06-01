@@ -1,0 +1,113 @@
+{% extends 'modelo.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+    <title>Home do Fornecedor</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Perfil do Fornecedor</h3>
+{% endblock %}
+
+{% block form %}
+    <form action="{% url 'perfil' %}" method="POST">{% csrf_token %}
+{% endblock %}
+
+{% block conteudo %}
+
+  
+
+    <div class="row gx-10 ">
+        <div class="col-auto col-md-7">
+            <div class=" col-auto col-md-10 px-4">
+                {{form_usuario.username|as_crispy_field}}
+                {{form_usuario.email|as_crispy_field}}
+            </div>
+        </div>
+        <div class="col-auto col-md-4">
+            {{form_usuario.password1|as_crispy_field}}
+            {{form_usuario.password2|as_crispy_field}}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-auto col-md-7  ">
+            <legend class="px-5 fw-bold">Informações Pessoais</legend>
+            <div class="row">
+                <div class="col-auto col-md-12">
+                    <div class=" col-auto col-md-8 px-4">
+                        {{form_usuario.first_name|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-12">
+                    <div class=" col-auto col-md-8 px-4">
+                        {{form_usuario.last_name|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-10">
+                    <div class=" col-auto col-md-6 px-4">
+                        {{form_fornecedor.cpf_cnpj|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-10">
+                    <div class=" col-auto col-md-6 px-4">
+                        {{form_fornecedor.telefone|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-10">
+                    <div class=" col-auto col-md-6 px-4">
+                        {{form_fornecedor.nascimento|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-12">
+                    <div class=" col-auto col-md-8 px-4">
+                        {{form_fornecedor.dap|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-12">
+                    <div class=" col-auto col-md-8 px-4">
+                        {{form_fornecedor.associacao|as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto col-md-5">
+            <legend class="px-4 fw-bold">Endereço Pessoal</legend>    
+            <div class="row">
+                <div class="col-auto col-md-9">
+                    {{form_fornecedor.endereco|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto col-md-9">
+                    {{form_fornecedor.bairro|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto col-md-9">
+                    {{form_fornecedor.cidade|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto col-md-3">
+                    {{form_fornecedor.estado|as_crispy_field}}
+                </div>
+            </div> 
+        </div>
+        <div class="row justify-content-end px-5 mb-3">
+            <div class="col-auto">
+                <a href="{% url 'login' %}"><button class="btn btn-lg btn-block btn-light font-black" type="button">Voltar</button></a>
+                <button class="btn btn-lg btn-block btn-primary font-black" type="submit">Salvar</button>
+            </div>
+        </div>    
+    </div>
+</form>
+{% endblock %}
+
+{% block paginacao %}
+{% endblock %}
+  
+
+
+

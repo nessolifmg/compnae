@@ -1,0 +1,66 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block menu %}
+<header>
+    <div id="menubar" class=" text-black">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <div class="col-3">
+            <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <img src={% static 'core/img/if.png' %} class="bi me-2" width="80" height="80 " role="img" aria-label="Bootstrap"></img>
+                <h3 class="d-flex align-items-center col-lg-auto my-2 justify-content-center my-md-0 text-small">IFMG-Campus Bambuí</h3> 
+            </a>
+          </div>
+          <div class="col-9">
+            <ul class="nav col-12 col-md-auto my-1 justify-content-center my-md-0 text-small">
+              <li>
+                <a href="{% url 'home_servidor' %}" class="nav-link text-black">
+                  <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#home"/></svg>
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'cadastro_alimentos' %}" class="nav-link text-black">
+                  <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#food"/></svg>
+                  Alimentos
+                </a>
+              </li>
+              <li>
+                  <a href="{% url 'cadastro_editais' %}" class="nav-link text-black">
+                    <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#document"/></svg>
+                    Editais
+                  </a>
+                </li>
+              <li>
+                <a href="{% url 'cadastrar_alimento_necessario' %}" class="nav-link text-black">
+                  <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#cart"/></svg>
+                  Alimentos Necessários
+                </a>
+              </li>
+              <li>
+                  <a href="{% url 'media' %}" class="nav-link text-black">
+                    <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#graph"/></svg>
+                    Média de Alimentos
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'fornecedores' %}" class="nav-link text-black">
+                  <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#graph"/></svg>
+                  Fornecedores
+                </a>
+              </li>
+              <li>
+                  <a href="{% url 'logout' %}" class="nav-link text-black">
+                    <svg class="bi d-block mx-auto mb-1" width="16" height="16"><use xlink:href="#logout"/></svg>
+                    Sair
+                  </a>
+                </li>
+            </ul>
+
+          </div>
+        </div>
+      
+    </div>
+</header>
+{% endblock %}

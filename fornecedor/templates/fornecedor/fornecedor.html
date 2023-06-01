@@ -1,0 +1,41 @@
+{% extends 'modelo.html' %}
+
+{% block titulo %}
+    <title>Home do Fornecedor</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Home do Fornecedor</h3>
+{% endblock %}
+
+{% block cabecalho_tabela %}
+    <thead>
+        <tr>
+            <th scope="col" colspan="4">Alimentos necessários do edital ativo</th>
+        </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Edital</th>
+            <th scope="col">Quantidade (Kg)</th>
+        </tr>
+    </thead>
+{% endblock %}
+
+{%block conteudo_tabela %}
+    <tbody>
+        {% for necessario in alimentos %}
+            {% if necessario.edital.status %}
+                <tr>
+                    <td>{{necessario.id}}</td>
+                    <td>{{necessario.alimento.nome}}</td>
+                    <td>{{necessario.edital.numero}}</td>
+                    <td>{{necessario.quantidade}}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+{% endblock %}    
+
+
+

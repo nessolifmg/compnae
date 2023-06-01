@@ -1,0 +1,81 @@
+{% extends 'modelo_serv.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    <title>Alimentos Necessários</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Alimentos Necessários</h3>
+{% endblock %}
+
+{% block campos %}  
+    <div class="row" >  
+        <div class="col col-md-4">
+            {{form_alimento_necessario.alimento|as_crispy_field}}
+        </div>
+
+        <div class="col col-md-2">
+            {{form_alimento_necessario.quantidade|as_crispy_field}}
+        </div>
+        <div class="col col-md-2">
+            {{form_alimento_necessario.edital|as_crispy_field}}
+        </div>
+        <div class="col col-md-4 py-4 text-end">
+            <a href="/servidor"><button class="btn btn-lg btn-block btn-secondary font-black" type="button">Voltar</button></a>
+            <button class="btn btn-lg btn-block btn-primary font-black" type="submit">Cadastrar</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block cabecalho_tabela %}             
+    <thead>
+        <tr>
+            <th scope="col" colspan="5">Alimentos por Edital vigente</th>
+        </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Edital</th>
+            <th scope="col">Quantidade (Kg)</th>
+        </tr>
+    </thead>
+{% endblock %}
+
+{% block conteudo_tabela %}
+    <tbody>
+        {% for alimento_necessario in alimentos_necessarios_pag %}
+                <tr>
+                    <td>{{alimento_necessario.id}}</td>
+                    <td>{{alimento_necessario.alimento.nome}}</td>
+                    <td>{{alimento_necessario.edital}}</td>
+                    <td>{{alimento_necessario.quantidade}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-block btn-danger font-black" 
+                            href={% url 'deletar_alimento_necessario' alimento_necessario_id=alimento_necessario.id %}>
+                            Deletar
+                        </a>
+                    </td>
+                </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}
+
+{% block paginacao %}
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if alimentos_necessarios_pag.has_previous %}
+            <a href="?page={{ alimentos_necessarios_pag.previous_page_number }}"><svg class="bi mx-auto mb-1" width="24" height="24"><use xlink:href="#arrow-left"/></svg></a>
+            
+            {% endif %}
+                <span>
+                    {{ alimentos_necessarios_pag.number}} de {{ alimentos_necessarios_pag.paginator.num_pages }}
+                </span>
+            {% if alimentos_necessarios_pag.has_next %}
+                <a href="?page={{ alimentos_necessarios_pag.next_page_number }}"><svg class="bi mx-auto mb-1" width="24" height="24"><use xlink:href="#arrow-right"/></svg></a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
+                  
+

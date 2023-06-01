@@ -1,0 +1,72 @@
+{% extends 'modelo.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    <title>Fornecer alimentos</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Fornecer Alimentos</h3>
+{% endblock %}
+
+{% block form %}
+      <form action="{% url 'fornecer_alimentos_submit' %}" method="POST">{% csrf_token %}
+{% endblock %}
+
+{% block cabecalho_tabela %}
+    <thead>
+        <tr>
+            <th scope="col" colspan="5">Alimentos necessários do edital ativo</th>
+        </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Edital</th>
+            <th scope="col">Quantidade (Kg)</th>
+            <th scope="col">Valor (R$)</th>
+        </tr>
+    </thead>
+{% endblock %}
+
+{% block conteudo_tabela %}
+    <tbody>
+        
+        {% for necessario in alimentos%}
+        
+                <tr class="captura">
+                    <td>
+                        {{necessario.id}}
+                    </td>
+                    <td>
+                        {{necessario.alimento.nome}}
+                    </td>
+                    <td>
+                        {{necessario.edital.numero}}
+                        <input type="text" value="{{necessario.edital.numero}}" name="edital" hidden>
+                    </td>
+                    <td>
+                        {{necessario.quantidade}}                                  
+                    </td>
+                    <td>
+                        <input type="number" name="{{necessario.id}}"/>
+                    </td>
+                </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %} 
+
+{% block paginacao %}
+{% endblock %}  
+
+{% block botao %}
+    <div class="container text-end ">
+        <a href="/servidor"><button class="btn btn-lg btn-block btn-secondary font-black" type="button">Voltar</button></a>
+        <button class="btn btn-lg btn-block btn-primary font-black" type="submit">Salvar</button>
+    </div>  
+ 
+{% endblock %}
+    
+
+    
+
+

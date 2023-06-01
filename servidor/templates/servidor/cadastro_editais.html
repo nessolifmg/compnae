@@ -1,0 +1,87 @@
+{% extends 'modelo_serv.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    <title>Cadastro de Editais</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Cadastro de Editais</h3>
+{% endblock %}
+
+{% block campos %}
+    <div class="p-2">
+    <div class="row" >  
+        <div class="col-auto col-md-6">
+            {{form_edital.numero|as_crispy_field}}
+        </div>
+        <div class="col-auto col-md-6 d-flex align-items-center justify-content-center">
+            <div class="form-check form-switch d-flex ">
+                {{form_edital.status|as_crispy_field}}
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-auto col-md-6">
+            {{form_edital.data_inicio|as_crispy_field}}
+        </div>
+        <div class="col-auto col-md-6 ">
+            {{form_edital.data_final|as_crispy_field}}
+        </div>
+        
+    </div>
+
+    <div class="container text-end mb-2">
+        <br>
+        <a href="/servidor"><button class="btn btn-lg btn-block btn-secondary font-black" type="button">Voltar</button></a>
+        <button class="btn btn-lg btn-block btn-primary font-black" type="submit">Salvar</button>
+    </div>
+{% endblock %}
+    
+{% block cabecalho_tabela %}
+    <thead>
+        <tr>
+            <th scope="col" colspan="4">Editais</th>
+        </tr>
+        <tr>
+            <th scope="col">Número</th>
+            <th scope="col">Data início</th>
+            <th scope="col">Data Final</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+{% endblock %}  
+
+{% block conteudo_tabela %}            
+    <tbody>
+        {% for edital in editais %}
+            <tr>
+                <td>{{edital.numero}}</td>
+                <td>{{edital.data_inicio}}</td>
+                <td>{{edital.data_final}}</td>
+                <td>
+                    <a class="btn btn-sm btn-block btn-warning font-black" 
+                    href={% url 'atualizar_edital' edital_id=edital.id %}>Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}  
+
+{% block paginacao %}
+    <div class="pagination justify-content-center">
+      <span class="step-links">
+        {% if editais.has_previous %}
+            <a href="?page={{ editais.previous_page_number }}"><svg class="bi mx-auto mb-1" width="24" height="24"><use xlink:href="#arrow-left"/></svg></a>
+        {% endif %}
+        <span>
+            {{ editais.number}} de {{ editais.paginator.num_pages }}
+        </span>
+        {% if editais.has_next %}
+            <a href="?page={{ editais.next_page_number }}"><svg class="bi mx-auto mb-1" width="24" height="24"><use xlink:href="#arrow-right"/></svg></a>
+        {% endif %}
+      </span>
+    </div>
+{% endblock %}      
+
+

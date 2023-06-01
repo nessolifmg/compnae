@@ -1,0 +1,37 @@
+{% extends 'modelo_serv.html' %}
+{% block titulo %}
+    <title>Home do Servidor</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Home do Servidor</h3>
+{% endblock %}
+
+{% block cabecalho_tabela %}                                
+    <thead>
+        <tr>
+            <th scope="col" colspan="4">Alimentos por Edital vigente</th>
+        </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Edital</th>
+            <th scope="col">Quantidade (Kg)</th>
+        </tr>
+    </thead>
+{% endblock %}
+
+{% block conteudo_tabela %}
+    <tbody>
+        {% for alimento in alimentos %}
+            <tr>
+                <td>{{alimento.id}}</td>
+                <td>{{alimento.alimento.nome}}</td>
+                <td>{{alimento.edital.numero}}</td>
+                <td>{{alimento.quantidade}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}
+
+

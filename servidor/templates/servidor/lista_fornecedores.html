@@ -1,0 +1,50 @@
+{% extends 'modelo_serv.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    <title>Cadastro de Alimentos</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Lista de Produtores</h3>
+{% endblock %}
+    
+{% block campos %}    
+    <div class="row">
+        <div class="col-auto col-md-6 form-white py-1">
+            <input class="form-control border-dark" name="input-fornecedores" type="text"></input>
+        </div>
+        <div class="col-auto d-flex align-items-center form-white mb-3">
+            <button class="btn btn-lg  btn-primary font-black" type="submit">Filtrar</button>
+        </div>
+    </div>
+{% endblock %} 
+     
+{% block cabecalho_tabela %}
+    <thead>
+        <tr>
+            <th scope="col" colspan="3">Fornecedor</th>
+        </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+        </tr>
+    </thead>
+{% endblock %}
+
+{% block conteudo_tabela %}
+    <tbody>
+        {% for alimento in alimentos %}
+            <tr>
+                <td>{{alimento.user_id}}</td>
+                <td>{{alimento.user.user.first_name}} {{alimento.user.user.last_name}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+                        
+{% endblock %}    
+
+
+            
+   
+

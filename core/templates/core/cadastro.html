@@ -1,0 +1,128 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro de Produtor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href={% static 'core/css/style.css' %} rel="stylesheet">
+</head>
+<body>
+    <form action="{% url 'cadastro_fornecedor' %}" method="POST">{% csrf_token %}
+        <div id="menubar" class="container bg-gradient ">
+            <div class="text-center p-2 mt-5">
+                <img src={% static 'core/img/if.png' %} class="bi me-2" width="100" height="100 " role="img" aria-label="Bootstrap"></img>
+                <h3 class="p-2 fw-bold">Cadastro de Fornecedor</h3> 
+            </div>
+            <div class="row gx-10 ">
+                <div class="col-auto col-md-7">
+                    <div class=" col-auto col-md-10 px-4">
+                        {{form_usuario.username|as_crispy_field}}
+                        {{form_usuario.email|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-auto col-md-4">
+                    {{form_usuario.password1|as_crispy_field}}
+                    {{form_usuario.password2|as_crispy_field}}
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-auto col-md-7  ">
+                    <legend class="px-5 fw-bold">Informações Pessoais</legend>
+                    <div class="row">
+                        <div class="col-auto col-md-12">
+                            <div class=" col-auto col-md-8 px-4">
+                                {{form_usuario.first_name|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-12">
+                            <div class=" col-auto col-md-8 px-4">
+                                {{form_usuario.last_name|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-10">
+                            <div class=" col-auto col-md-6 px-4">
+                                {{form_fornecedor.cpf_cnpj|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-10">
+                            <div class=" col-auto col-md-6 px-4">
+                                {{form_fornecedor.telefone|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-10">
+                            <div class=" col-auto col-md-6 px-4">
+                                {{form_fornecedor.nascimento|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-12">
+                            <div class=" col-auto col-md-8 px-4">
+                                {{form_fornecedor.dap|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-12">
+                            <div class=" col-auto col-md-8 px-4">
+                                {{form_fornecedor.associacao|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-12">
+                            <div class=" col-auto col-md-8 px-4">
+                                {{form_fornecedor.prioritario|as_crispy_field}}
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="col-auto col-md-5">
+                    <legend class="px-4 fw-bold">Endereço Pessoal</legend>    
+                    <div class="row">
+                        <div class="col-auto col-md-9">
+                            {{form_fornecedor.endereco|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto col-md-9">
+                            {{form_fornecedor.bairro|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto col-md-9">
+                            {{form_fornecedor.cidade|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto col-md-3">
+                            {{form_fornecedor.estado|as_crispy_field}}
+                        </div>
+                    </div> 
+                    
+                </div>
+                 <div class="row justify-content-end px-5 mb-3">
+                    <div class="col-auto">
+                        <a href="{% url 'login' %}"><button class="btn btn-lg btn-block btn-light font-black" type="button">Voltar</button></a>
+                        <button class="btn btn-lg btn-block btn-primary font-black" type="submit">Cadastrar</button>
+                    </div>
+                </div>    
+            </div>
+                
+
+        </div>
+    </form> 
+    <div class="container border-top">
+        <footer >
+          <h5 class="text-center text-muted">Instituto Federal de  Minas Gerais - Campus Bambuí</h5>
+          <p class="text-center text-muted"><svg class="bi mx-auto mb-1" width="10" height="10"><use xlink:href="#copyright"/></svg> Jorge Murilo e Lucas Batista </p>
+        </footer>
+      </div>
+    <div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src={% static 'core/js/jquery-3.6.0.min.js' %}></script>
+    <script src={% static 'core/js/jquery.mask.min.js' %}></script>
+    <script src={% static 'core/js/mask.js' %}></script>
+</body>
+</html>

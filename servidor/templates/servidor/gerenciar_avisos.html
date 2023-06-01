@@ -1,0 +1,27 @@
+{% extends 'modelo_serv.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    <title>Avisos</title>
+{% endblock %}
+
+{% block cabecalho %}
+    <h3 class="container text-center p-2">Gerenciar avisos</h3>
+{% endblock %}
+    
+     
+{% block conteudo%}
+    <div class="container">
+        {{form_avisos.aviso|as_crispy_field}}
+        <div class="col-auto text-end mb-3">
+            <button class="btn btn-lg  btn-primary font-black" type="submit">Salvar</button>
+        </div> 
+    </div>
+                   
+{% endblock %}    
+
+{% block paginacao %}
+{% endblock %}
+            
+   
+
