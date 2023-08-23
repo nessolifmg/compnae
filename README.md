@@ -111,11 +111,9 @@ Todos os envolvidos no desenvolvimento desse projeto, encontram-se abaixo listad
 * **Colaborador** - *Planejamento e programação* - [Lucas Batista](https://github.com/luks-santos)
 * **Professor Orientador** - *Documentação* - [Marcos Ribeiro](https://github.com/ribeiromarcos)
 
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
-
 ## 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/nessolifmg/compnae/blob/main/LICENSE) para detalhes.
 
 ## 🎁 Expressões de gratidão
 
