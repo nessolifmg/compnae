@@ -10,6 +10,8 @@ from .forms import UserCreationForm, FornecedorForm
 
 ROLE_SERVIDOR = 'servidor'
 ROLE_FORNECEDOR = 'fornecedor'
+
+
 def redirect_based_on_role(user):
     """
     Realiza o redirecionamento com base nas roles do usuário.
@@ -20,6 +22,7 @@ def redirect_based_on_role(user):
         return redirect('/fornecedor')
     else:
         return redirect('pagina-padrao')
+
 
 def login_user(request):
     if request.method == "POST":

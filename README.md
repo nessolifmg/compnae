@@ -49,6 +49,7 @@ source compnae/bin/activate
 # Ative o ambiente virtual (no Windows)
 source compnae\Scripts\activate
 ```
+
 - Execute os seguintes comandos para criar e ativar o ambiente virtual via conda:
 
 ```bash
