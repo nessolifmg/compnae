@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#---------------------Faz referência a classe Fornecedor--------------------------------
+
 class Fornecedor(models.Model):
-    ETNIA = (
+    ETNIA_CHOICES = (
         ('1', 'Quilombola'),
-        ('2', 'Indigena'),
+        ('2', 'Indígena'),
         ('3', 'Nenhum'),
     )
-    user = models.OneToOneField(to=User, primary_key=True, unique=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, primary_key=True, unique=True, on_delete=models.CASCADE)
     cpf_cnpj = models.CharField(max_length=14)
     telefone = models.CharField(max_length=15)
     cidade = models.CharField(max_length=150)
@@ -17,14 +17,13 @@ class Fornecedor(models.Model):
     bairro = models.CharField(max_length=150)
     nascimento = models.DateField()
     dap = models.CharField(max_length=25)
-    associacao = models.CharField(max_length=15, blank=True) 
+    associacao = models.CharField(max_length=15, blank=True)
     prioritario = models.CharField(
         max_length=1,
-        choices=ETNIA,
+        choices=ETNIA_CHOICES,
         default='3',
-        blank=True,
-        null=False
     )
+
     class Meta:
         db_table = 'fornecedor'
 

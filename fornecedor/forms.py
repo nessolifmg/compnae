@@ -1,7 +1,6 @@
 from django import forms as django_forms
-from django.contrib.auth import forms
+from .models import AlimentoFornecido
 
-from fornecedor.models import AlimentoFornecido
 
 class FornecerAlimentosForm(django_forms.ModelForm):
     class Meta:

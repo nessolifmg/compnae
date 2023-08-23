@@ -1,79 +1,75 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.db import transaction
+from rolepermissions.roles import assign_role
+from rolepermissions.checkers import has_role
+from .forms import UserCreationForm, FornecedorForm
 
-from .forms import UserCreationForm, FornecedorForm 
-
-
-
-#----------------------- Usuários----------------------------#
-def redirecionar(usuario,request): #Função para redirecionamento através dos grupos
-    if usuario.groups.filter(name="fornecedor"):
-        login(request, usuario)
+ROLE_SERVIDOR = 'servidor'
+ROLE_FORNECEDOR = 'fornecedor'
+def redirect_based_on_role(user):
+    """
+    Realiza o redirecionamento com base nas roles do usuário.
+    """
+    if has_role(user, ROLE_SERVIDOR):
+        return redirect('/servidor')
+    elif has_role(user, ROLE_FORNECEDOR):
         return redirect('/fornecedor')
-    elif usuario.groups.filter(name="servidor"):
-        login(request, usuario)
-        return redirect('/servidor')   
     else:
-        login(request, usuario)
-        return redirect('/admin')
+        return redirect('pagina-padrao')
 
-def logar_usuario(request): #Função de login de usuários
-    if request.method == "GET":
-        if request.user.is_authenticated:
-           #Se o usuário for autenticado redireciona através da função para  a página correta
-           return redirecionar(request.user, request)
-        form_login = AuthenticationForm() 
+def login_user(request):
+    if request.method == "POST":
+        form_login = AuthenticationForm(request, data=request.POST)
+        if form_login.is_valid():
+            username = form_login.cleaned_data.get('username')
+            password = form_login.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Verificar as permissões ou grupo do usuário e redirecionar adequadamente
+                return redirect_based_on_role(user)
+            else:
+                messages.error(request, "Usuário ou senha inválidos!")
     else:
-        #Realiza a captura do login e senha através do post
-        username = request.POST["username"]
-        password = request.POST["password"]
-        #Autentica o usuário
-        usuario = authenticate(request, username=username, password=password)
-        #Caso exista o usuário redirecioana através da função
-        if usuario is not None :
-            return redirecionar(usuario, request)
-        else:
-            form_login = AuthenticationForm()
-            messages.error(request, "Usuário ou senha inválidos!")
+        form_login = AuthenticationForm()
     context = {
         'form_login': form_login
     }
     return render(request, 'login.html', context=context)
 
+
+# Função de logout do sistema
 @login_required(login_url='/login/')
-def logout_user(request): #Função de logout do sistema
+def logout_user(request):
     logout(request)
     return redirect('/')
 
-def cadastrar_fornecedor(request): #Função para realizar o cadastro de fornecedores
+
+# Função para realizar o cadastro de fornecedores
+def register_supplier(request):
     if request.method == "POST":
-        #Faz uso dos formulários para facilitar a validação das informações
-        form_usuario = UserCreationForm(request.POST)
+        form_user = UserCreationForm(request.POST)
         form_fornecedor = FornecedorForm(request.POST)
-        if form_usuario.is_valid() and form_fornecedor.is_valid():
-            usuario = form_usuario.save()
-            #Adiciona o fornecedor cadastrado ao grupo fornecedor
-            usuario.groups.add(Group.objects.get(name='fornecedor'))
-            fornecedor = form_fornecedor.save(commit=False)
-            fornecedor.user = usuario
-            fornecedor.save()
+        if form_user.is_valid() and form_fornecedor.is_valid():
+            with transaction.atomic():
+                user = form_user.save()
+                assign_role(user, 'fornecedor')
+                fornecedor = form_fornecedor.save(commit=False)
+                fornecedor.user = user
+                fornecedor.save()
+            messages.success(request, "Fornecedor cadastrado com sucesso!")
             return redirect('/')
         else:
-            context = {
-                'form_usuario': form_usuario,
-                'form_fornecedor': FornecedorForm
-            }
+            messages.error(request, "Por favor, corrija os erros abaixo.")
     else:
-        form_usuario = UserCreationForm()
+        form_user = UserCreationForm()
         form_fornecedor = FornecedorForm()
-        context = {
-            'form_usuario': form_usuario,
-            'form_fornecedor': FornecedorForm,
-        }
+    context = {
+        'form_usuario': form_user,
+        'form_fornecedor': form_fornecedor
+    }
     return render(request, 'cadastro.html', context=context)
-
-

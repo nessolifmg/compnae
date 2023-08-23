@@ -22,7 +22,7 @@ cd compnae
 
 - No terminal, certifique-se de estar no diretório raiz do projeto.
 
-- Execute os seguintes comandos para criar e ativar o ambiente virtual:
+- Execute os seguintes comandos para criar e ativar o ambiente virtual via pip:
 ```bash
 # Instale o virtualenv (caso ainda não esteja instalado)
 pip install virtualenv
@@ -35,6 +35,28 @@ source compnae/bin/activate
 
 # Ative o ambiente virtual (no Windows)
 source compnae\Scripts\activate
+```
+```bash
+# Instale o virtualenv (caso ainda não esteja instalado)
+pip install virtualenv
+
+# Crie um ambiente virtual chamado "compnae"
+virtualenv compnae
+
+# Ative o ambiente virtual (no macOS/Linux)
+source compnae/bin/activate
+
+# Ative o ambiente virtual (no Windows)
+source compnae\Scripts\activate
+```
+- Execute os seguintes comandos para criar e ativar o ambiente virtual via conda:
+
+```bash
+# Crie um ambiente virtual chamado "compnae"
+conda create --name compnae
+
+# Ative o ambiente virtual
+conda activate compnae
 ```
 
 3. Instalar as dependências do projeto: 
